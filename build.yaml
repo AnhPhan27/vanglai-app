@@ -1,0 +1,14 @@
+# build.yaml - Configuration for flutter_gen
+targets:
+  $default:
+    builders:
+      flutter_gen_runner:flutter_gen_runner:
+        enabled: true
+        options:
+          # Output directory for generated files
+          output: lib/gen/
+          # Line length for generated files
+          line_length: 80
+          # Generate integrations
+          integrations:
+            flutter_svg: true

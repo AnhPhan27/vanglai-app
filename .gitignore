@@ -18,20 +18,23 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# VSCode
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
+.flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
+.packages
 /build/
 /coverage/
+
+# Web related
+lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
@@ -39,7 +42,53 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
+# Android related
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/.gradle
+/android/local.properties
+/android/captures/
+/android/gradlew
+/android/gradlew.bat
+/android/key.properties
+
+# iOS/macOS related
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral
+**/ios/Pods/
+**/ios/.symlinks/
+**/macos/Flutter/flutter_export_environment.sh
+**/macos/Flutter/ephemeral
+
+# Environment & Secret files
+.env
+.env.local
+.env.*.local
+*.env
+secrets.json
+google-services.json
+GoogleService-Info.plist
+
+# Firebase
+**/ios/Runner/GoogleService-Info.plist
+**/android/app/google-services.json
+firebase_app_id_file.json
+.firebase/
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.gen.dart
+*.config.dart
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup files
+*.backup
+*.bak
+*~

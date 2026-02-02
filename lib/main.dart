@@ -4,12 +4,26 @@ import 'di/service_locator.dart';
 import 'routes/app_routes.dart';
 import 'common/theme/app_theme.dart';
 import 'common/constants/app_constants.dart';
+import 'data/network/services/supabase_service.dart';
+import 'data/network/services/google_sign_in_service.dart';
+import 'data/network/constants/supabase_constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Khởi tạo Supabase
+  await SupabaseService.initialize(
+    url: SupabaseConstants.projectUrl,
+    anonKey: SupabaseConstants.anonKey,
+  );
+
   // Setup dependency injection
   await setupServiceLocator();
+
+  // Khởi tạo Google Sign In với Web Client ID (serverClientId cho Android)
+  await getIt<GoogleSignInService>().initialize(
+    serverClientId: SupabaseConstants.googleWebClientId,
+  );
 
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
@@ -25,14 +39,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
-      initialRoute: AppRoutes.splash,
-      onGenerateRoute: AppRoutes.onGenerateRoute,
+      routerConfig: AppRoutes.router,
     );
   }
 }
