@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import '../presentation/pages/splash/splash_page.dart';
 import '../presentation/pages/login/login_page.dart';
-import '../presentation/pages/home/home_page.dart';
+import '../presentation/pages/home/pages/home_page.dart';
 
 class AppRoutes {
   AppRoutes._();

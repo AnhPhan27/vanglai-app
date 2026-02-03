@@ -9,6 +9,12 @@ class AppColors {
   ); // Orange - Icons, Active Tab, Highlights
   static const Color primaryDark = Color(0xFFE56F0F);
   static const Color primaryLight = Color(0xFFFFA85C);
+  static const Color primary10 = Color.fromRGBO(
+    245,
+    140,
+    37,
+    0.1,
+  ); // 10% opacity
 
   // Accent Colors
   static const Color accent = Color(

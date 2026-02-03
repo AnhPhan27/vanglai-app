@@ -63,6 +63,7 @@ class TabSelector extends StatelessWidget {
     return GestureDetector(
       onTap: () => onChanged(value),
       child: Container(
+        height: 48,
         decoration: BoxDecoration(
           color: isSelected ? Colors.white : Colors.transparent,
           borderRadius: BorderRadius.circular(8),

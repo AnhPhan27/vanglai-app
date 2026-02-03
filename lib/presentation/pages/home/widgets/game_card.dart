@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../common/theme/app_colors.dart';
-import '../../common/theme/app_text_styles.dart';
-import '../../data/model/game_match.dart';
-import 'badge_chip.dart';
+import '../../../../common/theme/app_colors.dart';
+import '../../../../common/theme/app_text_styles.dart';
+import '../../../../data/model/game_match.dart';
+import '../../../widgets/badge_chip.dart';
 
 class GameCard extends StatelessWidget {
   final GameMatch game;

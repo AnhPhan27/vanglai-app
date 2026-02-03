@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:vanglai_app/presentation/pages/activity_hub/activity_hub_page.dart';
-import 'package:vanglai_app/presentation/pages/post/post_page.dart';
-import 'package:vanglai_app/presentation/pages/profile/profile.dart';
-import '../../base/base_state.dart';
-import '../../widgets/game_card.dart';
-import '../../widgets/custom_app_bar.dart';
-import '../../widgets/tab_selector.dart';
-import '../../../data/model/game_match.dart';
-import '../../../common/theme/app_colors.dart';
-import '../../../common/theme/app_text_styles.dart';
+import 'package:vanglai_app/presentation/pages/post/pages/post_page.dart';
+import 'package:vanglai_app/presentation/pages/profile/pages/profile.dart';
+import 'package:vanglai_app/presentation/pages/chat/chat_page.dart';
+import '../../../base/base_state.dart';
+import '../widgets/game_card.dart';
+import '../../../widgets/custom_app_bar.dart';
+import '../../../widgets/tab_selector.dart';
+import '../../../../data/model/game_match.dart';
+import '../../../../common/theme/app_colors.dart';
+import '../../../../common/theme/app_text_styles.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,7 +25,7 @@ class _HomePageState extends BaseState<HomePage> {
   final List<Widget> _pages = [
     const HomeTab(),
     const ActivityHubTab(),
-    const PostTab(),
+    const ChatPage(),
     const ProfileTab(),
   ];
 
@@ -32,6 +34,19 @@ class _HomePageState extends BaseState<HomePage> {
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       body: _pages[_currentIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PostTab()),
+          );
+        },
+        backgroundColor: AppColors.primary,
+        elevation: 4,
+        child: const Icon(Icons.add, color: Colors.white, size: 32),
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: _buildBottomNavigation(),
     );
   }
@@ -46,31 +61,39 @@ class _HomePageState extends BaseState<HomePage> {
         child: SizedBox(
           height: 64,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavItem(
-                icon: Icons.home,
-                label: 'Home',
-                index: 0,
-                isActive: _currentIndex == 0,
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.home,
+                  label: 'Home',
+                  index: 0,
+                  isActive: _currentIndex == 0,
+                ),
               ),
-              _buildNavItem(
-                icon: Icons.grid_view,
-                label: 'Activity Hub',
-                index: 1,
-                isActive: _currentIndex == 1,
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.grid_view,
+                  label: 'Activity Hub',
+                  index: 1,
+                  isActive: _currentIndex == 1,
+                ),
               ),
-              _buildNavItem(
-                icon: Icons.add_box,
-                label: 'Post',
-                index: 2,
-                isActive: _currentIndex == 2,
+              const SizedBox(width: 56),
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.chat,
+                  label: 'Chat',
+                  index: 2,
+                  isActive: _currentIndex == 2,
+                ),
               ),
-              _buildNavItem(
-                icon: Icons.person,
-                label: 'Profile',
-                index: 3,
-                isActive: _currentIndex == 3,
+              Expanded(
+                child: _buildNavItem(
+                  icon: Icons.person,
+                  label: 'Profile',
+                  index: 3,
+                  isActive: _currentIndex == 3,
+                ),
               ),
             ],
           ),
@@ -99,13 +122,13 @@ class _HomePageState extends BaseState<HomePage> {
             Icon(
               icon,
               size: 26,
-              color: isActive ? AppColors.accent : AppColors.textSecondary,
+              color: isActive ? AppColors.primary : AppColors.textSecondary,
             ),
             const SizedBox(height: 4),
             Text(
               label,
               style: AppTextStyles.labelSmall.copyWith(
-                color: isActive ? AppColors.accent : AppColors.textSecondary,
+                color: isActive ? AppColors.primary : AppColors.textSecondary,
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
               ),
             ),
@@ -190,9 +213,11 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundLight,
       appBar: CustomAppBar(
         title: 'VangLai',
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+        ),
         leading: AppBarIconButton(
           icon: Icons.notifications_outlined,
           showBadge: true,
@@ -234,7 +259,7 @@ class _HomeTabState extends State<HomeTab> {
                 _selectedSport = sport;
               });
             },
-            selectedColor: AppColors.accent,
+            selectedColor: AppColors.primary,
           ),
           Expanded(
             child: ListView.separated(

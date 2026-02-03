@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 
+// Export all common widgets
+export '../pages/profile/widgets/profile_header.dart';
+export '../pages/profile/widgets/profile_stat_card.dart';
+export '../pages/profile/widgets/profile_activity_item.dart';
+export 'custom_app_bar.dart';
+export 'app_button.dart';
+export 'activity_card.dart';
+export '../pages/home/widgets/game_card.dart';
+export 'badge_chip.dart';
+export 'tab_selector.dart';
+export '../pages/setting/widgets/settings_list_item.dart';
+export '../pages/setting/widgets/settings_section_header.dart';
+
 class LoadingWidget extends StatelessWidget {
   final String? message;
 
